@@ -3,6 +3,8 @@
 This repository contains the code (in PyTorch) for the paper:
 See you somewhere in the ocean: Few-shot domain adaptive underwater object detection
 
+The code of this repository is based on: https://github.com/ultralytics/yolov5
+
 
 ### Dependencies
 
