@@ -13,3 +13,8 @@ See you somewhere in the ocean: Few-shot domain adaptive underwater object detec
 - tqdm
 - tensorboardX
 
+### Sourcedomaintrain 
+python train.py --data crossdomain.yaml --epochs 300 --weights yolov5x.pt --cfg yolov5x_CS.yaml
+
+### Targetdomaintrain 
+python trainfreeze.py --data aquam.yaml --epochs 300 --weights your_source_trained_weight_path --cfg yolov5x_CS.yaml
