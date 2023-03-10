@@ -7,6 +7,8 @@ The code of this repository is based on: https://github.com/ultralytics/yolov5
 
 Our demo is based on :https://www.youtube.com/watch?v=PfEz7yE4m0U
 
+The left side of the demo video is our proposed method, and the right side is our baseline (yolov5)
+
 ### Dependencies
 
 - Python 3.7
