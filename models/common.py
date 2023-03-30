@@ -868,11 +868,7 @@ class Crossdomainnet(nn.Module):
 
         self.f1 = nn.Conv2d(in_planes, in_planes, 1, groups=in_planes,bias=False)
         self.relu = nn.ReLU()
-        # self.f2 = nn.Conv2d(in_planes // ratio, in_planes, 1, bias=False)
-        # 写法二,亦可使用顺序容器
-        # self.sharedMLP = nn.Sequential(
-        # nn.Conv2d(in_planes, in_planes // ratio, 1, bias=False), nn.ReLU(),
-        # nn.Conv2d(in_planes // rotio, in_planes, 1, bias=False))
+        
 
 
         self.sigmoid = nn.Sigmoid()
@@ -880,11 +876,7 @@ class Crossdomainnet(nn.Module):
 
     def forward(self, x):
         finalin=self.avg_pool(x)#+self.max_pool(x)
-        # avg_out = self.relu(self.f1(finalin))
-        # out= avg_out
         avg_out = self.f1(finalin)
-        #max_out = self.f2(self.relu(self.f1(self.max_pool(x))))
-        #out = self.sigmoid(avg_out + max_out)
         out = self.sigmoid(avg_out)
         # out = self.relu(avg_out)
         #ablation experiments
@@ -892,6 +884,20 @@ class Crossdomainnet(nn.Module):
 
 
 class C3_CS(nn.Module):
+    # CSP Bottleneck with 3 convolutions
+    def __init__(self, c1, c2, n=1, shortcut=True, g=1, e=0.5):  # ch_in, ch_out, number, shortcut, groups, expansion
+        super().__init__()
+        c_ = int(c2 * e)  # hidden channels
+        self.cv1 = Conv(c1, c_, 1, 1)
+        self.cv2 = Conv(c1, c_, 1, 1)
+        self.cv3 = Conv(2 * c_, c2, 1)  # optional act=FReLU(c2)
+        self.m = nn.Sequential(*(Bottleneck(c_, c_, shortcut, g, e=1.0) for _ in range(n)))
+        self.csnet=Crossdomainnet(c2,8)
+
+    def forward(self, x):
+        return self.csnet(self.cv3(torch.cat((self.m(self.cv1(x)), self.cv2(x)), 1)))
+    
+class C3_FCM(nn.Module):
     # CSP Bottleneck with 3 convolutions
     def __init__(self, c1, c2, n=1, shortcut=True, g=1, e=0.5):  # ch_in, ch_out, number, shortcut, groups, expansion
         super().__init__()
