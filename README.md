@@ -27,7 +27,7 @@ urpc  链接：https://pan.baidu.com/s/1QcTsP62KQcEiB831cGimRw
 aquarium https://universe.roboflow.com/data-science-day-dry-run/aquarium-6cfzm/dataset/1
 
 ### Sourcedomaintrain 
-python train.py --data crossdomain.yaml --epochs 300 --weights yolov5x.pt --cfg yolov5x_CS.yaml
+python train.py --data crossdomain.yaml --epochs 300 --weights yolov5x.pt --cfg yolov5x_FCM.yaml
 
 ### Targetdomaintrain 
-python trainfreeze.py --data aquam.yaml --epochs 300 --weights your_source_trained_weight_path --cfg yolov5x_CS.yaml
+python trainfreeze.py --data aquam.yaml --epochs 300 --weights your_source_trained_weight_path --cfg yolov5x_FCM.yaml
