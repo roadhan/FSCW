@@ -873,7 +873,7 @@ class Crossdomainnet(nn.Module):
 
 
         self.sigmoid = nn.Sigmoid()
-        #jinxing ablation experiments
+        # ablation experiments
 
     def forward(self, x):
         finalin=self.avg_pool(x)#+self.max_pool(x)
