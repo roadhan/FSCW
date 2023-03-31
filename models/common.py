@@ -865,18 +865,18 @@ class Crossdomainnet(nn.Module):
     def __init__(self, in_planes, ratio=16):
         super(Crossdomainnet, self).__init__()
         self.avg_pool = nn.AdaptiveAvgPool2d(1)
-        # self.max_pool = nn.AdaptiveMaxPool2d(1)
+        self.max_pool = nn.AdaptiveMaxPool2d(1)
 
         self.f1 = nn.Conv2d(in_planes, in_planes, 1, groups=in_planes,bias=False)
         self.relu = nn.ReLU()
-        
-
 
         self.sigmoid = nn.Sigmoid()
         # ablation experiments
 
     def forward(self, x):
-        finalin=self.avg_pool(x)#+self.max_pool(x)
+        #ablation experiments
+        #finalin=self.avg_pool(x)
+        finalin=self.max_pool(x)
         avg_out = self.f1(finalin)
         out = self.sigmoid(avg_out)
         # out = self.relu(avg_out)
