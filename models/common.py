@@ -860,6 +860,7 @@ class Classify(nn.Module):
         return self.linear(self.drop(self.pool(self.conv(x)).flatten(1)))
 
 
+#This is our FCM module
 class Crossdomainnet(nn.Module):
     def __init__(self, in_planes, ratio=16):
         super(Crossdomainnet, self).__init__()
@@ -881,7 +882,7 @@ class Crossdomainnet(nn.Module):
         # out = self.relu(avg_out)
         #ablation experiments
         return torch.mul(x, out)
-
+#This is our FCM module
 
 class C3_CS(nn.Module):
     # CSP Bottleneck with 3 convolutions
