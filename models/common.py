@@ -875,8 +875,8 @@ class Crossdomainnet(nn.Module):
 
     def forward(self, x):
         #ablation experiments
-        #finalin=self.avg_pool(x)
-        finalin=self.max_pool(x)
+        finalin=self.avg_pool(x)
+        #finalin=self.max_pool(x)
         avg_out = self.f1(finalin)
         out = self.sigmoid(avg_out)
         # out = self.relu(avg_out)
